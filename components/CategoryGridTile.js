@@ -1,4 +1,4 @@
-import { Platform, Pressable, StyleSheet, Text, View } from "react-native"
+import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 
 function CategoryGridTile({ title, color, pressMealCategory }) {
     return (
