@@ -28,6 +28,7 @@ const MealsOverviewScreen = ({ route, navigation, }) => {
     const item = itemData.item;``
 
     const mealItemProps = {
+      id: item.id,
       title: itemData.item.title,
       imageUrl: itemData.item.imageUrl,
       affordability: itemData.item.affordability,
