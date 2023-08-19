@@ -8,6 +8,7 @@ import DetailsScreen from './screens/DetailsScreen';
 import FavoritesScreen from './screens/FavoritesScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {Ionicons} from '@expo/vector-icons';
+import FavoritesContextProvider from './store/context/favorites-context';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -40,32 +41,34 @@ export default function App() {
   return (
     <>
       <StatusBar style = 'dark'/>
-      <NavigationContainer>
-        {/* Use stack navigator to set default screen options. The specific screen options will override generic settings */}
-        <Stack.Navigator screenOptions = {{
-           headerStyle: { backgroundColor: '#cccccc' },
-           headerTintColor: 'white',
-           contentStyle: {backgroundColor: '#3f2f25'},
-        }}>
-          <Stack.Screen 
-            name='MealCategories' 
-            component={DrawerNavigator} 
-            options = { {
-              headerShown: false,
-            } } 
-          />
-          <Stack.Screen name='MealsOverview' component={MealsOverviewScreen} 
-          /* one way to dynamically set up dynamic route information */
-          // options = { ({ route, navigation }) => {
-          //   const catId = route.params.categoryId;
-          //   return {
-          //     title: catId,
-          //   };
-          // } }
-          />
-          <Stack.Screen name='DetailsScreen' component={DetailsScreen} options={{ title: 'About the Meal'}} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <FavoritesContextProvider>
+        <NavigationContainer>
+          {/* Use stack navigator to set default screen options. The specific screen options will override generic settings */}
+          <Stack.Navigator screenOptions = {{
+            headerStyle: { backgroundColor: '#cccccc' },
+            headerTintColor: 'white',
+            contentStyle: {backgroundColor: '#3f2f25'},
+          }}>
+            <Stack.Screen 
+              name='MealCategories' 
+              component={DrawerNavigator} 
+              options = { {
+                headerShown: false,
+              } } 
+            />
+            <Stack.Screen name='MealsOverview' component={MealsOverviewScreen} 
+            /* one way to dynamically set up dynamic route information */
+            // options = { ({ route, navigation }) => {
+            //   const catId = route.params.categoryId;
+            //   return {
+            //     title: catId,
+            //   };
+            // } }
+            />
+            <Stack.Screen name='DetailsScreen' component={DetailsScreen} options={{ title: 'About the Meal'}} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </FavoritesContextProvider>
     </>
   );
 }
